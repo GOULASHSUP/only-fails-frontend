@@ -39,7 +39,7 @@ export default function AddProductForm() {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
-        'auth-token': token || '', // Fallback to empty string for type safety
+        'auth-token': token || '',
         },
         body: JSON.stringify(formData),
     });
@@ -67,12 +67,20 @@ export default function AddProductForm() {
     };
 
     return (
-        <section className="w-full max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-24">
+        <section className="w-full max-w-2xl mx-auto p-6 bg-zinc-50 rounded-4xl shadow-md mt-24">
             <h2 className="text-2xl font-bold mb-6 text-center text-blue-400">Add New Failed Product</h2>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
                 <div>
-                    <label className="block text-sm text-blue-400 font-medium pl-3">Product Name</label>
-                    <input name="name" value={formData.name} onChange={handleChange} className="w-full border text-zinc-600 border-blue-400 rounded-full px-3 py-2" required />
+                    <label className="block text-sm text-blue-400 font-medium pl-3">Product Name – Min 20 characters</label>
+                    <input
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full border text-zinc-600 border-blue-400 rounded-full px-3 py-2"
+                        required
+                        minLength={20}
+                        maxLength={500}
+                    />
                 </div>
                 <div>
                     <label className="block text-sm text-blue-400 font-medium pl-3">Start Date</label>
@@ -83,12 +91,27 @@ export default function AddProductForm() {
                     <input name="failureDate" type="date" value={formData.failureDate} onChange={handleChange} className="w-full border text-zinc-600 border-blue-400 rounded-full px-3 py-2" required />
                 </div>
                 <div>
-                    <label className="block text-sm text-blue-400 font-medium pl-3">Description</label>
-                    <textarea name="description" value={formData.description} onChange={handleChange} className="w-full border text-zinc-600 border-blue-400 rounded-4xl px-3 py-2" required />
+                    <label className="block text-sm text-blue-400 font-medium pl-3">Description – Min 20 characters</label>
+                    <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        className="w-full border text-zinc-600 border-blue-400 rounded-4xl px-3 py-2"
+                        required
+                        minLength={20}
+                        maxLength={500}
+                    />
                 </div>
                 <div>
-                    <label className="block text-sm text-blue-400 font-medium pl-3">Designed By</label>
-                    <input name="designedBy" value={formData.designedBy} onChange={handleChange} className="w-full border text-zinc-600 border-blue-400 rounded-full px-3 py-2" required />
+                    <label className="block text-sm text-blue-400 font-medium pl-3">Designed By – Max 50 characters</label>
+                    <input
+                        name="designedBy"
+                        value={formData.designedBy}
+                        onChange={handleChange}
+                        className="w-full border text-zinc-600 border-blue-400 rounded-full px-3 py-2"
+                        required
+                        maxLength={50}
+                    />
                 </div>
                 <div>
                     <label className="block text-sm text-blue-400 font-medium pl-3">Image URL</label>
