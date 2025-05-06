@@ -67,7 +67,7 @@ export default function AddProductForm() {
     };
 
     return (
-        <section className="w-full max-w-2xl mx-auto p-6 bg-zinc-50 rounded-4xl shadow-md mt-24">
+        <section className="w-full max-w-4xl mx-auto p-6 bg-zinc-50 rounded-4xl shadow-md mt-24">
             <h2 className="text-2xl font-bold mb-6 text-center text-blue-400">Add New Failed Product</h2>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
                 <div>
