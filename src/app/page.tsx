@@ -3,6 +3,7 @@
 import Navbar from '@/components/layout/navbar';
 import HeroSection from '@/components/homepage/HeroSection';
 import AboutSection from '@/components/homepage/AboutSection';
+import FeaturedFailsSection from '@/components/homepage/FeaturedFailsSection';
 
 export default function HomePage() {
   return (
@@ -10,6 +11,7 @@ export default function HomePage() {
       <Navbar />
       <HeroSection />
       <AboutSection />
+      <FeaturedFailsSection />
     </main>
   );
 }
