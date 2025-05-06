@@ -4,6 +4,7 @@ import Navbar from '@/components/layout/navbar';
 import HeroSection from '@/components/homepage/HeroSection';
 import AboutSection from '@/components/homepage/AboutSection';
 import FeaturedFailsSection from '@/components/homepage/FeaturedFailsSection';
+import FooterSection from '@/components/layout/footerSection';
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <HeroSection />
       <AboutSection />
       <FeaturedFailsSection />
+      <FooterSection />
     </main>
   );
 }
