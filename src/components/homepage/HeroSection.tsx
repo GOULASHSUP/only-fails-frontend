@@ -39,7 +39,14 @@ export default function HeroSection() {
             <p className="text-3xl uppercase text-pink-400 tracking-widest mb-3">The most upvoted product</p>
             <h1 className="text-5xl font-bold mb-4">{topProducts[0]?.name}</h1>
             <p className="text-lg font-black text-pink-400 mb-6">Upvotes: {topProducts[0]?.upvotes}</p>
-            <button className="bg-blue-400 hover:bg-blue-300 text-zinc-100 font-semibold px-6 py-3 rounded-full transition">
+            <button
+                className="bg-blue-400 hover:bg-blue-300 text-zinc-100 font-semibold px-6 py-3 rounded-full transition"
+                onClick={() => {
+                    if (topProducts[0]?._id) {
+                        window.location.href = `/product/${topProducts[0]._id}`;
+                    }
+                }}
+            >
                 See this fail
             </button>
             </div>
