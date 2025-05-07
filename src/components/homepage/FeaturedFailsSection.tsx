@@ -96,7 +96,7 @@ return (
 
             <div className="mt-10 text-center">
             <button
-                onClick={() => router.push('/')}
+                onClick={() => router.push('/catalog')}
                 className="bg-pink-400 hover:bg-pink-300 text-zinc-50 font-semibold px-6 py-3 rounded-full transition"
             >
                 See All Fails
