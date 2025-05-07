@@ -1,4 +1,3 @@
-// src/components/product/SingleProductCard.tsx
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -66,7 +65,7 @@ export default function SingleProductCard({ productId }: SingleProductCardProps)
                 <p className="text-lg text-zinc-700 mb-6">{product.description}</p>
 
                 {/* Product Metadata */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 bg-zinc-100 p-4 rounded-2xl">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-zinc-100 p-4 rounded-2xl">
                     <p className="text-zinc-600">
                         <strong>Category:</strong> {product.category}
                     </p>
@@ -83,26 +82,9 @@ export default function SingleProductCard({ productId }: SingleProductCardProps)
                     <p className="text-zinc-600">
                         <strong>Alive For:</strong> {daysAlive} days
                     </p>
-                </div>
-
-                {/* Actions Section */}
-                <div className="flex flex-col sm:flex-row gap-4">
-                    <button className="bg-pink-500 hover:bg-pink-400 text-zinc-50 px-6 py-3 rounded-full transition">
-                        <span className="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                                <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clipRule="evenodd" />
-                            </svg>
-                            {product.upvotes}
-                        </span>
-                    </button>
-                    <button className="bg-pink-500 hover:bg-pink-400 text-zinc-50 px-6 py-3 rounded-full transition">
-                        <span className="flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                                <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72 1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z" clipRule="evenodd" />
-                            </svg>
-                            {product.downvotes}
-                        </span>
-                    </button>
+                    <p className={`${(product.upvotes - product.downvotes) <= 0 ? 'text-red-500' : 'text-blue-400'}`}>
+                        <strong>Vote Score:</strong> {product.upvotes - product.downvotes}
+                    </p>
                 </div>
             </div>
         </div>
