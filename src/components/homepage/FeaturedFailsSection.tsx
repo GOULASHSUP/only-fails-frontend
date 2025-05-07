@@ -50,9 +50,9 @@ return (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 {products.map((product) => (
                     <a
-                    key={product._id}
-                    href="#"
-                    className="group relative block bg-black overflow-hidden rounded-4xl"
+                        key={product._id}
+                        href={`/product/${product._id}`}
+                        className="group relative block bg-black overflow-hidden rounded-4xl"
                     >
                     <img
                         alt={product.name}

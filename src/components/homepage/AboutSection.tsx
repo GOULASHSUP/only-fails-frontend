@@ -23,7 +23,7 @@ export default function AboutSection() {
                             onClick={() => router.push('/')}
                             className="bg-pink-400 hover:bg-pink-300 text-zinc-100 font-semibold px-6 py-3 rounded-full transition"
                             >
-                            Learn more about us
+                            Learn More About Us
                         </button>
                     </div>
                 </div>
