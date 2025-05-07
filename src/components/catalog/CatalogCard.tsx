@@ -151,9 +151,12 @@ export default function CatalogCard({ product }: CatalogCardProps) {
                         </span>
                     </button>
 
-                    <button className="bg-blue-400 hover:bg-blue-300 text-zinc-50 px-4 py-2 rounded-full transition">
+                    <a
+                        href={`/product/${product._id}`}
+                        className="bg-blue-400 hover:bg-blue-300 text-zinc-50 px-4 py-2 rounded-full transition text-center block"
+                    >
                         Read More
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
