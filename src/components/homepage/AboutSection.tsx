@@ -6,7 +6,7 @@ export default function AboutSection() {
     const router = useRouter();
 
     return (
-        <section className="overflow-hidden bg-zinc-50 sm:grid sm:grid-cols-2 items-center max-w-7xl mx-auto rounded-4xl">
+        <section className="overflow-hidden bg-zinc-50 sm:grid sm:grid-cols-2 items-center max-w-7xl rounded-4xl sm:mx-0 mx-4">
             {/* Text content column */}
             <div className="p-8 md:p-12 lg:px-16 lg:py-24">
                 <div className="mx-auto max-w-xl text-center sm:text-left">
@@ -15,7 +15,7 @@ export default function AboutSection() {
                     </h2>
 
                     <p className="text-zinc-600 md:mt-4">
-                        Amazing projects start with amazing ideas. At OnlyFails, we celebrate innovation that doesn’t always go as planned. Join us as we build a place where creativity thrives—even when it stumbles.
+                        Amazing projects start with amazing ideas. At OnlyFails, we celebrate innovation that doesn’t always go as planned. Join us as we build a place where creativity thrives—even when it stumbles. If you want to see all the biggest flops of the past, check out catalog!
                     </p>
 
                     <div className="mt-4 md:mt-8">
