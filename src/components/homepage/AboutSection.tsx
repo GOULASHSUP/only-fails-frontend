@@ -20,7 +20,7 @@ export default function AboutSection() {
 
                     <div className="mt-4 md:mt-8">
                         <button
-                            onClick={() => router.push('/')}
+                            onClick={() => router.push('/about')}
                             className="bg-pink-400 hover:bg-pink-300 text-zinc-100 font-semibold px-6 py-3 rounded-full transition"
                             >
                             Learn More About Us

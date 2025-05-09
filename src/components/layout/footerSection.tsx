@@ -16,7 +16,7 @@ export default function Footer() {
                         <a className="text-zinc-100 transition hover:text-pink-300" href="/">Home</a>
                         </li>
                         <li>
-                        <a className="text-zinc-100 transition hover:text-pink-300" href="#">About</a>
+                        <a className="text-zinc-100 transition hover:text-pink-300" href="/about">About</a>
                         </li>
                         <li>
                         <a className="text-zinc-100 transition hover:text-pink-300" href="/catalog">Catalog</a>
