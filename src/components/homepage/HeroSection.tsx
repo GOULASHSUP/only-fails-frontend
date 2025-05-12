@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { API_BASE_URL } from '@/lib/auth';
+import { API_BASE_URL } from '@/lib/config';
 
 interface FailedProduct {
     _id: string;

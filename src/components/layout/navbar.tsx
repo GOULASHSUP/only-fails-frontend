@@ -2,21 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useAuth } from "@/lib/hooks/useAuth";
 
 export default function Navbar() {
     const router = useRouter();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { user, initialized, logout } = useAuth();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        setIsLoggedIn(!!token);
-    }, []);
-
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        setIsLoggedIn(false);
-        router.refresh();
+        logout();
+        setMobileMenuOpen(false);
     };
 
     const navButtons = (
@@ -57,16 +52,16 @@ export default function Navbar() {
                 <span>Catalog</span>
             </button>
             {/* Login/Logout */}
-            {isLoggedIn ? (
+            {initialized && user?.role === 'user' ? (
                 <button
-                    className="bg-pink-400 hover:bg-pink-300 text-zinc-50 px-4 py-2 rounded-full transition"
-                    onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
+                    className="bg-pink-500 hover:bg-pink-400 text-white px-4 py-2 rounded-full transition"
+                    onClick={handleLogout}
                 >
                     Logout
                 </button>
             ) : (
                 <button
-                    className="bg-blue-400 hover:bg-blue-300 text-zinc-50 px-4 py-2 rounded-full transition"
+                    className="bg-blue-400 hover:bg-blue-300 text-white px-4 py-2 rounded-full transition"
                     onClick={() => { router.push('/login'); setMobileMenuOpen(false); }}
                 >
                     Login

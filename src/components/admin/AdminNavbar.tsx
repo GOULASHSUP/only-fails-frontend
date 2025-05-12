@@ -2,19 +2,19 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import useAdminAuth from '@/lib/hooks/useAdminAuth';
+import { useAuth } from "@/lib/hooks/useAuth";
 
 export default function AdminNavbar() {
     const router = useRouter();
-    const isAdmin = useAdminAuth();
+    const { user, initialized, logout } = useAuth();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        router.push('/');
+        logout();
+        setMobileMenuOpen(false);
     };
 
-    if (!isAdmin) return null;
+    if (!initialized || user?.role !== "admin") return null;
 
     const navButtons = (
         <>
@@ -66,7 +66,6 @@ export default function AdminNavbar() {
                 className="bg-pink-500 hover:bg-pink-400 text-white px-4 py-2 rounded-full transition"
                 onClick={() => {
                     handleLogout();
-                    setMobileMenuOpen(false);
                 }}
             >
                 Logout
