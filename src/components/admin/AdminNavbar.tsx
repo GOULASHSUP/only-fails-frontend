@@ -20,7 +20,10 @@ export default function AdminNavbar() {
         <>
             <button
                 className="text-zinc-100 hover:text-pink-400 transition"
-                onClick={() => { router.push('#add-product'); setMobileMenuOpen(false); }}
+                onClick={() => {
+                    router.push('/admin/dashboard#add-product');
+                    setMobileMenuOpen(false);
+                }}
             >
                 <span className="flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -31,7 +34,10 @@ export default function AdminNavbar() {
             </button>
             <button
                 className="text-zinc-100 hover:text-pink-400 transition"
-                onClick={() => { router.push('#product-list'); setMobileMenuOpen(false); }}
+                onClick={() => {
+                    router.push('/admin/dashboard#product-list');
+                    setMobileMenuOpen(false);
+                }}
             >
                 <span className="flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -43,7 +49,10 @@ export default function AdminNavbar() {
             </button>
             <button
                 className="text-zinc-100 hover:text-pink-400 transition"
-                onClick={() => { router.push('#user-list'); setMobileMenuOpen(false); }}
+                onClick={() => {
+                    router.push('/admin/dashboard#user-list');
+                    setMobileMenuOpen(false);
+                }}
             >
                 <span className="flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -55,7 +64,10 @@ export default function AdminNavbar() {
             </button>
             <button
                 className="bg-pink-500 hover:bg-pink-400 text-white px-4 py-2 rounded-full transition"
-                onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
+                onClick={() => {
+                    handleLogout();
+                    setMobileMenuOpen(false);
+                }}
             >
                 Logout
             </button>

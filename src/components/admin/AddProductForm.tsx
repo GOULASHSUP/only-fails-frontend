@@ -67,7 +67,7 @@ export default function AddProductForm() {
     };
 
     return (
-        <section className="w-full max-w-4xl mx-auto p-6 bg-zinc-50 rounded-4xl shadow-md mt-24">
+        <section id="add-product" className="w-full max-w-7xl mx-auto p-6 bg-zinc-50 rounded-4xl shadow-md mt-24">
             <h2 className="text-2xl font-bold mb-6 text-center text-blue-400">Add New Failed Product</h2>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
                 <div>
@@ -125,9 +125,11 @@ export default function AddProductForm() {
                 {error && <p className="text-red-500">{error}</p>}
                 {successMessage && <p className="text-blue-400">{successMessage}</p>}
 
-                <button type="submit" className="bg-pink-400 hover:bg-pink-300 text-zinc-50 px-4 py-2 rounded-full transition">
-                    Add Product
-                </button>
+                <div className="flex justify-end w-full mt-4 md:mt-0">
+                    <button type="submit" className="bg-pink-400 hover:bg-pink-300 text-zinc-50 px-4 py-2 rounded-full transition w-full md:w-auto">
+                        Add Product
+                    </button>
+                </div>
             </form>
         </section>
     );

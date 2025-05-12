@@ -48,7 +48,6 @@ export default function ProductListSection() {
     fetchProducts();
 }, []);
 
-    // Delete handler
     const handleDelete = async (productId: string) => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -62,12 +61,12 @@ export default function ProductListSection() {
     };
 
     return (
-        <section className="w-full max-w-4xl mx-auto bg-zinc-50 shadow-md rounded-4xl p-6 mt-8">
+        <section id="product-list" className="w-full max-w-7xl mx-auto bg-zinc-50 shadow-md rounded-4xl p-6 mt-8">
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-400">All Failed Products</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
             <ul className="space-y-4">
                 {products.map((product) => (
-                <li key={product._id} className="flex justify-between items-center border-b pb-2">
+                <li key={product._id} className="flex justify-between items-center border-b-2 text-zinc-600 pb-4">
                     <div className="flex items-center gap-4">
                         <img
                             src={product.imageURL}
@@ -79,7 +78,7 @@ export default function ProductListSection() {
                             <p className="text-sm text-zinc-600">Category: {product.category} | Failed: {new Date(product.failureDate).toLocaleDateString()}</p>
                         </div>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col gap-2 sm:flex-row">
                         <button
                             onClick={() => {
                                 setProductToEdit(product);
