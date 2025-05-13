@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { API_BASE_URL } from '@/lib/auth';
+import { useAuth } from "@/lib/hooks/useAuth";
 
 export default function UserLoginForm() {
+    const { login } = useAuth();
     const router = useRouter();
     const [formData, setFormData] = useState({
         email: '',
@@ -18,34 +19,13 @@ export default function UserLoginForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError('');
-
+        setError("");
         try {
-        console.log('[Login] Submitting form:', { email: formData.email });
-        const res = await fetch(`${API_BASE_URL}/auth/login`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
-        console.log('[Login] Server response status:', res.status);
-
-        if (!res.ok) {
-            const data = await res.json();
-            const message = data.message || 'Login failed';
-            console.warn('[Login] Incorrect email or password.');
-            throw new Error(message);
-        }
-
-        const { token } = await res.json();
-        console.log('[Login] Received token:', token);
-        localStorage.setItem('token', token);
-        console.log('[Login] Token stored. Redirecting to /');
-        router.push('/');
+          await login({ email: formData.email, password: formData.password });
+          router.push("/");
         } catch (err: any) {
-            console.error('[Login] Login error:', err.message);
-            setError(err.message);
+          console.error("[Login] Error:", err.message);
+          setError(err.message || "Login failed");
         }
     };
 

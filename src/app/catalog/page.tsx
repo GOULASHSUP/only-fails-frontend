@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footerSection';
 import CatalogCard from '@/components/catalog/CatalogCard';
+import { API_BASE_URL } from "@/lib/config";
 
 interface Product {
     _id: string;
@@ -21,7 +22,7 @@ export default function CatalogPage() {
 useEffect(() => {
     const fetchProducts = async () => {
         try {
-            const res = await fetch('http://localhost:4000/api/failed-products');
+            const res = await fetch(`${API_BASE_URL}/failed-products`);
             if (!res.ok) {
                 throw new Error('Failed to fetch products');
             }

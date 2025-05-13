@@ -1,14 +1,26 @@
 'use client';
 
-import useAdminAuth from '@/lib/hooks/useAdminAuth';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/hooks/useAuth";
 import AdminNavbar from '@/components/admin/AdminNavbar';
 import AddProductForm from '@/components/admin/AddProductForm';
 import ProductListSection from '@/components/admin/ProductListSection';
 
 export default function AdminDashboardPage() {
-    const isAdmin = useAdminAuth();
+    const { user, initialized } = useAuth();
+    const router = useRouter();
 
-    if (!isAdmin) return null;
+    useEffect(() => {
+        if (!initialized) return;
+        if (!user || user.role !== "admin") {
+            router.replace("/admin/login");
+        }
+    }, [initialized, user, router]);
+
+    if (!initialized || !user || user.role !== "admin") {
+        return null;
+    }
 
     return (
         <>

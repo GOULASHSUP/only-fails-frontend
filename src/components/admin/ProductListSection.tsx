@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { API_BASE_URL } from "@/lib/config";
 
 interface Product {
     _id: string;
@@ -33,7 +34,7 @@ export default function ProductListSection() {
     useEffect(() => {
         const fetchProducts = async () => {
         try {
-            const res = await fetch('http://localhost:4000/api/failed-products');
+            const res = await fetch(`${API_BASE_URL}/failed-products`);
             if (!res.ok) {
             throw new Error('Failed to fetch products');
             }
@@ -162,7 +163,7 @@ export default function ProductListSection() {
                                 return;
                             }
                             try {
-                                const res = await fetch(`http://localhost:4000/api/failed-products/${productToDelete}`, {
+                                const res = await fetch(`${API_BASE_URL}/failed-products/${productToDelete}`, {
                                 method: 'DELETE',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -213,7 +214,7 @@ export default function ProductListSection() {
                                 return;
                                 }
                                 try {
-                                const res = await fetch(`http://localhost:4000/api/failed-products/${productToEdit._id}`, {
+                                const res = await fetch(` ${API_BASE_URL}/failed-products/${productToEdit._id}`, {
                                     method: 'PUT',
                                     headers: {
                                     'Content-Type': 'application/json',

@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { API_BASE_URL } from '@/lib/auth';
+import { useAuth } from "@/lib/hooks/useAuth";
+import { API_BASE_URL } from '@/lib/config';
 
 export default function UserRegisterForm() {
+const { login } = useAuth();
 const router = useRouter();
 const [formData, setFormData] = useState({
     username: '',
@@ -36,8 +38,8 @@ const handleSubmit = async (e: React.FormEvent) => {
         const data = await res.json();
         throw new Error(data.message || 'Registration failed');
     }
-    console.log('[Register] Registration successful. Redirecting to login...');
-    router.push('/login');
+    await login({ email: formData.email, password: formData.password });
+    router.push("/");
     } catch (err: any) {
         console.error('[Register] Registration error:', err.message);
         setError(err.message);

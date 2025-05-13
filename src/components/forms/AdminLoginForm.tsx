@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { API_BASE_URL } from '@/lib/auth';
+import { API_BASE_URL } from '@/lib/config';
+import { useAuth } from "@/lib/hooks/useAuth";
 
 export default function AdminLoginForm() {
     const router = useRouter();
@@ -11,6 +12,7 @@ export default function AdminLoginForm() {
         password: '',
     });
     const [error, setError] = useState('');
+    const { login } = useAuth();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,32 +20,15 @@ export default function AdminLoginForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError('');
-
-    try {
-        const res = await fetch(`${API_BASE_URL}/auth/admin/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-        console.warn('[Admin Login] Authentication failed.');
-        throw new Error(data.message || 'Admin login failed');
-    }
-
-    console.log('[Admin Login] Email:', formData.email);
-    console.log('[Admin Login] Login successful. Redirecting to dashboard.');
-
-    localStorage.setItem('token', data.token);
-    router.push('/admin/dashboard');
-    } catch (err: any) {
-    console.error('[Admin Login] Error:', err.message);
-    setError('Incorrect email or password');
-    }
-};
+        setError("");
+        try {
+            await login({ email: formData.email, password: formData.password });
+            router.push("/admin/dashboard");
+        } catch (err: any) {
+            console.error("[Admin Login] Error:", err.message);
+            setError(err.message || "Incorrect email or password");
+        }
+    };
 
 return (
     <form onSubmit={handleSubmit} className="space-y-4">
