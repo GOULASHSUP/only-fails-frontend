@@ -3,6 +3,7 @@
 'use client';
 
 import { useState } from 'react';
+import { API_BASE_URL } from "@/lib/config";
 
 export default function AddProductForm() {
     const [formData, setFormData] = useState({
@@ -35,7 +36,7 @@ export default function AddProductForm() {
     }
 
     try {
-    const response = await fetch('http://localhost:4000/api/failed-products', {
+    const response = await fetch(`${API_BASE_URL}/failed-products`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
