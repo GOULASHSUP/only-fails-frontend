@@ -16,6 +16,7 @@ interface Product {
     downvotes: number;
 }
 
+// Main component definition
 export default function ProductListSection() {
     const [products, setProducts] = useState<Product[]>([]);
     const [error, setError] = useState('');
@@ -31,6 +32,7 @@ export default function ProductListSection() {
         setShowModal(true);
     };
 
+    // Async function to get all products from the API
     useEffect(() => {
         const fetchProducts = async () => {
         try {
@@ -61,6 +63,7 @@ export default function ProductListSection() {
         return;
     };
 
+    // Main UI for displaying product list
     return (
         <section id="product-list" className="w-full max-w-7xl mx-auto bg-zinc-50 shadow-md rounded-4xl p-6 mt-8">
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-400">All Failed Products</h2>

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { API_BASE_URL } from '@/lib/config';
 import { useAuth } from "@/lib/hooks/useAuth";
 
+// Props definition for CatalogCard component
 interface CatalogCardProps {
     product: {
         _id: string;
@@ -18,7 +19,7 @@ interface CatalogCardProps {
 export default function CatalogCard({ product }: CatalogCardProps) {
     const { user, initialized } = useAuth();
 
-
+    // State and logic for managing toast message visibility
     const [toastMessage, setToastMessage] = useState<string | null>(null);
     const toastTimer = useRef<NodeJS.Timeout | null>(null);
     const showToast = (message: string) => {
@@ -107,7 +108,8 @@ export default function CatalogCard({ product }: CatalogCardProps) {
             console.error('[CatalogCard] Voting error:', error);
         }
     };
-
+    
+    // Render product card with image, details, voting buttons, and "Read More" link
     return (
       <>
         <div className="w-full max-w-full bg-zinc-50 rounded-4xl overflow-hidden shadow-md">
@@ -123,6 +125,7 @@ export default function CatalogCard({ product }: CatalogCardProps) {
 
                 <div className="mt-4 flex gap-2">
                   {(['upvote', 'downvote'] as const).map((type) => {
+                    // Render a voting button with dynamic style and count
                     const count = type === 'upvote' ? upvotes : downvotes;
                     const Icon = (
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">

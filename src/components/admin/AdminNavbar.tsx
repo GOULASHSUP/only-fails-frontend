@@ -9,6 +9,7 @@ export default function AdminNavbar() {
     const { user, initialized, logout } = useAuth();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    // Logout function and close mobile menu 
     const handleLogout = () => {
         logout();
         setMobileMenuOpen(false);
@@ -73,6 +74,7 @@ export default function AdminNavbar() {
         </>
     );
 
+    // Render header with navigation for desktop and a toggleable menu for mobile
     return (
         <header className="w-full bg-blue-500 shadow-md fixed top-0 left-0 z-50">
             <nav className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">

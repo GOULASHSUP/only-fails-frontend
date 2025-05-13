@@ -7,28 +7,31 @@ import { useAuth } from "@/lib/hooks/useAuth";
 export default function UserLoginForm() {
     const { login } = useAuth();
     const router = useRouter();
+    // State to track form inputs values
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
+    // State to handle API success or error messages
     const [error, setError] = useState('');
-
+    // This function updates the formData state with the new value from the input field
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
+    // Handle form submission, attempt login, redirect on success, or show error on failure
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
         try {
-          await login({ email: formData.email, password: formData.password });
-          router.push("/");
+            await login({ email: formData.email, password: formData.password });
+            router.push("/");
         } catch (err: any) {
-          console.error("[Login] Error:", err.message);
-          setError(err.message || "Login failed");
+            console.error("[Login] Error:", err.message);
+            setError(err.message || "Login failed");
         }
     };
 
+    // Render the login form with input fields for email and password validation
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
             {error && <p className="text-red-600 text-sm">{error}</p>}

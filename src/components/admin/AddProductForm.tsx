@@ -1,11 +1,10 @@
-
-
 'use client';
 
 import { useState } from 'react';
 import { API_BASE_URL } from "@/lib/config";
 
 export default function AddProductForm() {
+    // State to track form inputs
     const [formData, setFormData] = useState({
         name: '',
         startDate: '',
@@ -16,6 +15,7 @@ export default function AddProductForm() {
         category: '',
     });
 
+    // State to handle API success or error messages
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -24,12 +24,14 @@ export default function AddProductForm() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    // Handles form submission. Validates token, sends request to backend, and resets form
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setSuccessMessage('');
 
     const token = localStorage.getItem('token');
+        // Get the token from local storage
         if (!token) {
             setError('Admin token not found.');
         return;
@@ -37,6 +39,7 @@ export default function AddProductForm() {
 
     try {
     const response = await fetch(`${API_BASE_URL}/failed-products`, {
+        // Send a POST request to the backend API to add a new product
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -49,6 +52,7 @@ export default function AddProductForm() {
         throw new Error('Failed to add product');
     }
 
+        // Send success message + reset form
         setSuccessMessage('Product added successfully!');
         console.log('[AddProductForm] Product added successfully:', formData);
         setFormData({
@@ -67,6 +71,7 @@ export default function AddProductForm() {
         }
     };
 
+    // Render the form UI with input fields and feedback messages
     return (
         <section id="add-product" className="w-full max-w-7xl mx-auto p-6 bg-zinc-50 rounded-4xl shadow-md mt-24">
             <h2 className="text-2xl font-bold mb-6 text-center text-blue-400">Add New Failed Product</h2>

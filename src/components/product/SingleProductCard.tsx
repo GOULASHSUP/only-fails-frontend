@@ -20,10 +20,12 @@ interface SingleProductCardProps {
     productId: string;
 }
 
+// Component to display a single product card with details
 export default function SingleProductCard({ productId }: SingleProductCardProps) {
     const [product, setProduct] = useState<Product | null>(null);
     const [error, setError] = useState('');
 
+    // Fetch product details from the API using the productId prop
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -36,6 +38,7 @@ export default function SingleProductCard({ productId }: SingleProductCardProps)
                 const data = await res.json();
                 setProduct(data);
             } catch (err: any) {
+                // Handle error and set error message
                 console.error('[SingleProductCard] Error fetching product:', err.message);
                 setError('Could not load product');
             }
@@ -47,11 +50,13 @@ export default function SingleProductCard({ productId }: SingleProductCardProps)
     if (error) return <p className="text-red-500">{error}</p>;
     if (!product) return <p>Loading...</p>;
 
+    // Calculate the number of days the product has been alive by subtracting the start date from the failure date
     const daysAlive = Math.ceil(
         (new Date(product.failureDate).getTime() - new Date(product.startDate).getTime()) /
         (1000 * 60 * 60 * 24)
     );
 
+    // Render the product card with image and details
     return (
         <div className="max-w-7xl mx-auto bg-white rounded-4xl overflow-hidden shadow-lg">
             {/* Image Section */}

@@ -4,11 +4,13 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuth } from "@/lib/hooks/useAuth";
 
+// This component handles the navigation bar for the application
 export default function Navbar() {
     const router = useRouter();
     const { user, initialized, logout } = useAuth();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    // Close mobile menu on route change
     const handleLogout = () => {
         logout();
         setMobileMenuOpen(false);

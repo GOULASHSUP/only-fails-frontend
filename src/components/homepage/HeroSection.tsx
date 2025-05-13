@@ -13,15 +13,18 @@ interface FailedProduct {
 
 export default function HeroSection() {
     const [topProducts, setTopProducts] = useState<FailedProduct[]>([]);
-
+    // Fetch the most upvoted product from the API
     useEffect(() => {
         const fetchTopProducts = async () => {
         try {
             const res = await fetch(`${API_BASE_URL}/failed-products`);
             const data: FailedProduct[] = await res.json();
             const sorted = [...data].sort((a, b) => b.upvotes - a.upvotes).slice(0, 1);
+            // Sort by upvotes in descending order and take the top product
             setTopProducts(sorted);
+        
         } catch (err) {
+            // Catch and log any errors that occur during the fetch
             console.error('[HeroSection] Failed to load products:', err);
         }
     };
@@ -29,6 +32,7 @@ export default function HeroSection() {
     fetchTopProducts();
     }, []);
 
+    // Render the hero section with the most upvoted product
     return (
         <section
             className="relative w-full h-screen bg-cover bg-center flex items-center text-zinc-100"
@@ -47,6 +51,7 @@ export default function HeroSection() {
                 <button
                     className="bg-blue-400 hover:bg-blue-300 text-zinc-100 font-semibold px-6 py-3 rounded-full transition"
                     onClick={() => {
+                        // Redirect to the product page of the most upvoted product
                         if (topProducts[0]?._id) {
                             window.location.href = `/product/${topProducts[0]._id}`;
                         }

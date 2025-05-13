@@ -10,6 +10,7 @@ interface AuthUser {
   role: 'admin' | 'user';
 }
 
+// This hook manages user authentication, including login, logout, and session expiration
 export function useAuth() {
   const router = useRouter();
   const pathname = usePathname();
@@ -17,6 +18,7 @@ export function useAuth() {
   const [initialized, setInitialized] = useState(false);
   const logoutTimer = useRef<number|null>(null);
 
+  // Logout function that clears the token and timer, then redirects to the login page
   const logout = useCallback(() => {
     if (logoutTimer.current) clearTimeout(logoutTimer.current);
     localStorage.removeItem("token");
@@ -26,12 +28,14 @@ export function useAuth() {
     router.replace(redirectPath);
   }, [pathname, router]);
 
+  // Schedule logout based on token expiration time
   const scheduleLogout = useCallback((exp: number) => {
     const ms = exp*1000 - Date.now();
     if (ms <= 0) return logout();
     logoutTimer.current = window.setTimeout(logout, ms);
   }, [logout]);
 
+  // Login function that sends credentials to the server, stores the token, and sets user state
   const login = useCallback(async (credentials: { email: string; password: string }) => {
     const endpoint = pathname.startsWith("/admin")
       ? `${API_BASE_URL}/auth/admin/login`
@@ -67,6 +71,7 @@ export function useAuth() {
     return () => { if (logoutTimer.current) clearTimeout(logoutTimer.current); };
   }, [scheduleLogout]);
 
+  // Listen for storage events to handle logout across tabs
   useEffect(() => {
     function onStorage(e: StorageEvent) {
       if (e.key === "token") {
