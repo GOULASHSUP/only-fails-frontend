@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function AboutSection() {
     const router = useRouter();
@@ -31,7 +32,7 @@ export default function AboutSection() {
 
             {/* Illustration column */}
             <div className="flex justify-center items-center p-8 md:p-12">
-                <img
+                <Image
                 alt="About OnlyFails"
                 src="/illustrations/about-illustration.png"
                 className="w-full max-w-xl object-contain sm:max-w-2xl"

@@ -44,9 +44,10 @@ const handleSubmit = async (e: React.FormEvent) => {
     }
     await login({ email: formData.email, password: formData.password });
     router.push("/");
-    } catch (err: any) {
-        console.error('[Register] Registration error:', err.message);
-        setError(err.message);
+    } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        console.error('[Register] Registration error:', message);
+        setError(message);
     }
 };
 

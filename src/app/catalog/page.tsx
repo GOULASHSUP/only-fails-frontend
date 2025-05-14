@@ -32,8 +32,9 @@ useEffect(() => {
             const sorted = data.sort((a: Product, b: Product) => b.upvotes - a.upvotes);
 
             setProducts(sorted);
-        } catch (err: any) {
-            console.error('[CatalogPage] Error fetching products:', err.message);
+        } catch (err) {
+            const message = err instanceof Error ? err.message : String(err);
+            console.error('[CatalogPage] Error fetching products:', message);
             setError('Could not load products');
         }
     };

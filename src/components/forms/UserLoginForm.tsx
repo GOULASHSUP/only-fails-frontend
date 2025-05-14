@@ -25,9 +25,10 @@ export default function UserLoginForm() {
         try {
             await login({ email: formData.email, password: formData.password });
             router.push("/");
-        } catch (err: any) {
-            console.error("[Login] Error:", err.message);
-            setError(err.message || "Login failed");
+        } catch (err) {
+            const message = err instanceof Error ? err.message : String(err);
+            console.error("[Login] Error:", message);
+            setError(message || "Login failed");
         }
     };
 

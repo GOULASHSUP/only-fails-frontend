@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
     return (
         <footer className="bg-blue-400 text-zinc-50 w-full">
@@ -13,16 +15,16 @@ export default function Footer() {
                     </div>
                     <ul className="mt-8 flex flex-wrap text-md justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12">
                         <li>
-                        <a className="text-zinc-100 transition hover:text-pink-300" href="/">Home</a>
+                        <Link className="text-zinc-100 transition hover:text-pink-300" href="/">Home</Link>
                         </li>
                         <li>
-                        <a className="text-zinc-100 transition hover:text-pink-300" href="/about">About</a>
+                        <Link className="text-zinc-100 transition hover:text-pink-300" href="/about">About</Link>
                         </li>
                         <li>
-                        <a className="text-zinc-100 transition hover:text-pink-300" href="/catalog">Catalog</a>
+                        <Link className="text-zinc-100 transition hover:text-pink-300" href="/catalog">Catalog</Link>
                         </li>
                         <li>
-                        <a className="text-zinc-100 transition hover:text-pink-300" href="/login">Login</a>
+                        <Link className="text-zinc-100 transition hover:text-pink-300" href="/login">Login</Link>
                         </li>
                     </ul>
                 </div>

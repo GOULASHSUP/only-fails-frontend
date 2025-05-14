@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { API_BASE_URL } from '@/lib/config';
+import Image from 'next/image';
 
 interface Product {
     _id: string;
@@ -37,9 +38,9 @@ export default function SingleProductCard({ productId }: SingleProductCardProps)
 
                 const data = await res.json();
                 setProduct(data);
-            } catch (err: any) {
-                // Handle error and set error message
-                console.error('[SingleProductCard] Error fetching product:', err.message);
+            } catch (err) {
+                const message = err instanceof Error ? err.message : String(err);
+                console.error('[SingleProductCard] Error fetching product:', message);
                 setError('Could not load product');
             }
         };
@@ -61,7 +62,7 @@ export default function SingleProductCard({ productId }: SingleProductCardProps)
         <div className="max-w-7xl mx-auto bg-white rounded-4xl overflow-hidden shadow-lg">
             {/* Image Section */}
             <div className="w-full aspect-[16/9] overflow-hidden rounded-t-4xl">
-                <img src={product.imageURL} alt={product.name} className="w-full h-full object-cover" />
+                <Image src={product.imageURL} alt={product.name} className="w-full h-full object-cover" />
             </div>
             
             {/* Product Details Section */}

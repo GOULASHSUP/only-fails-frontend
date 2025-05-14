@@ -1,8 +1,8 @@
-// src/app/about/page.tsx
 'use client';
 
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footerSection';
+import Image from 'next/image';
 
 export default function AboutPage() {
     return (
@@ -12,7 +12,7 @@ export default function AboutPage() {
                 <div className="max-w-7xl mx-auto">
                     <div className="card lg:card-side bg-zinc-50 rounded-4xl shadow-lg overflow-hidden">
                         <figure className="lg:w-full aspect-[16/8] overflow-hidden">
-                            <img
+                            <Image
                                 src="illustrations/about.jpg"
                                 alt="About Us"
                                 className="w-full h-full object-cover"
@@ -25,12 +25,12 @@ export default function AboutPage() {
                                     Welcome to OnlyFails – where we celebrate the courage to try and the lessons we learn from failure.
                                 </p>
                                 <p className='mb-3'>
-                                    Our mission is to share the stories of failed ideas, forgotten inventions, and ambitious projects that didn't quite hit the mark. 
-                                    We believe that every failure is a stepping stone towards success, and that there's always something valuable to learn from every flop.
+                                    Our mission is to share the stories of failed ideas, forgotten inventions, and ambitious projects that didn&apos;t quite hit the mark. 
+                                    We believe that every failure is a stepping stone towards success, and that there&apos;s always something valuable to learn from every flop.
                                 </p>
                                 <p className='mb-8'>
-                                    Whether you're an entrepreneur, an inventor, or just someone who loves a good story, 
-                                    we're here to inspire you to keep pushing forward, no matter the setbacks.
+                                    Whether you&apos;re an entrepreneur, an inventor, or just someone who loves a good story, 
+                                    we&apos;re here to inspire you to keep pushing forward, no matter the setbacks.
                                 </p>
                                 <p className='mb-8'>
                                     For more information about our products and services, check out our full product catalog.

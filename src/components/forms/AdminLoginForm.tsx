@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { API_BASE_URL } from '@/lib/config';
 import { useAuth } from "@/lib/hooks/useAuth";
 
 export default function AdminLoginForm() {
@@ -27,9 +26,10 @@ export default function AdminLoginForm() {
         try {
             await login({ email: formData.email, password: formData.password });
             router.push("/admin/dashboard");
-        } catch (err: any) {
-            console.error("[Admin Login] Error:", err.message);
-            setError(err.message || "Incorrect email or password");
+        } catch (err) {
+            const message = err instanceof Error ? err.message : String(err);
+            console.error("[Admin Login] Error:", message);
+            setError(message || "Incorrect email or password");
         }
     };
 
