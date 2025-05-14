@@ -2,7 +2,6 @@
 
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footerSection';
-import Image from 'next/image';
 
 export default function AboutPage() {
     return (
@@ -12,7 +11,8 @@ export default function AboutPage() {
                 <div className="max-w-7xl mx-auto">
                     <div className="card lg:card-side bg-zinc-50 rounded-4xl shadow-lg overflow-hidden">
                         <figure className="lg:w-full aspect-[16/8] overflow-hidden">
-                            <Image
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
                                 src="illustrations/about.jpg"
                                 alt="About Us"
                                 className="w-full h-full object-cover"

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { API_BASE_URL } from "@/lib/config";
-import Image from 'next/image';
 
 interface Product {
     _id: string;
@@ -74,7 +73,8 @@ export default function ProductListSection() {
                 {products.map((product) => (
                 <li key={product._id} className="flex justify-between items-center border-b-2 text-zinc-600 pb-4">
                     <div className="flex items-center gap-4">
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                             src={product.imageURL}
                             alt={product.name}
                             className="w-16 h-16 object-cover rounded-lg"
@@ -126,7 +126,8 @@ export default function ProductListSection() {
                 <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 p-4">
                     <div className="bg-zinc-50 rounded-4xl shadow-lg w-full p-6 relative max-w-3xl">
                         <h3 className="text-xl font-bold mb-4 text-blue-400">Product Details</h3>
-                        <Image src={selectedProduct.imageURL} alt={selectedProduct.name} className="w-full aspect-video object-cover rounded-3xl mb-4" />
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={selectedProduct.imageURL} alt={selectedProduct.name} className="w-full aspect-video object-cover rounded-3xl mb-4" />
                         <div className='text-zinc-600 gap-3 flex flex-col'>
                             <div className='flex gap-4'>
                                 <p><strong>Name:</strong> {selectedProduct.name}</p>

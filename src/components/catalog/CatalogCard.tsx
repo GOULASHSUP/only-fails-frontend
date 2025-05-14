@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { API_BASE_URL } from '@/lib/config';
 import { useAuth } from "@/lib/hooks/useAuth";
-import Image from 'next/image';
 
 // Props definition for CatalogCard component
 interface CatalogCardProps {
@@ -114,7 +113,8 @@ export default function CatalogCard({ product }: CatalogCardProps) {
     return (
       <>
         <div className="w-full max-w-full bg-zinc-50 rounded-4xl overflow-hidden shadow-md">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
                 src={product.imageURL}
                 alt={product.name}
                 className="aspect-[16/11] w-full object-cover"

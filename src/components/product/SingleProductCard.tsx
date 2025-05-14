@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { API_BASE_URL } from '@/lib/config';
-import Image from 'next/image';
 
 interface Product {
     _id: string;
@@ -62,7 +61,8 @@ export default function SingleProductCard({ productId }: SingleProductCardProps)
         <div className="max-w-7xl mx-auto bg-white rounded-4xl overflow-hidden shadow-lg">
             {/* Image Section */}
             <div className="w-full aspect-[16/9] overflow-hidden rounded-t-4xl">
-                <Image src={product.imageURL} alt={product.name} className="w-full h-full object-cover" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={product.imageURL} alt={product.name} className="w-full h-full object-cover" />
             </div>
             
             {/* Product Details Section */}
