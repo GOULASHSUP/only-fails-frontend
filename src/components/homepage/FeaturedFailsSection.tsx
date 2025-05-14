@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { API_BASE_URL } from '@/lib/config';
-import Image from 'next/image';
 
 interface FailedProduct {
   _id: string;
@@ -58,7 +57,8 @@ export default function FeaturedFailsSection() {
                           href={`/product/${product._id}`}
                           className="group relative block bg-black overflow-hidden rounded-4xl"
                       >
-                      <Image
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
                           alt={product.name}
                           src={product.imageURL}
                           className="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
