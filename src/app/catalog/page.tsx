@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footerSection';
 import CatalogCard from '@/components/catalog/CatalogCard';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { API_BASE_URL } from "@/lib/config";
 
 interface Product {
@@ -18,9 +19,11 @@ interface Product {
 export default function CatalogPage() {
     const [products, setProducts] = useState<Product[]>([]);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
 
 useEffect(() => {
     const fetchProducts = async () => {
+        setLoading(true);
         try {
             const res = await fetch(`${API_BASE_URL}/failed-products`);
             if (!res.ok) {
@@ -36,6 +39,8 @@ useEffect(() => {
             const message = err instanceof Error ? err.message : String(err);
             console.error('[CatalogPage] Error fetching products:', message);
             setError('Could not load products');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -73,11 +78,15 @@ useEffect(() => {
 
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 pb-16">
-                    {products.map((product) => (
-                    <CatalogCard key={product._id} product={product} />
-                    ))}
-                </div>
+                {loading ? (
+                    <LoadingSpinner />
+                ) : (
+                    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 pb-16">
+                        {products.map((product) => (
+                        <CatalogCard key={product._id} product={product} />
+                        ))}
+                    </div>
+                )}
             </div>
         </main>
         <Footer />

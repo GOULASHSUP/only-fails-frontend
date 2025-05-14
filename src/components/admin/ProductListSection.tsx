@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { API_BASE_URL } from "@/lib/config";
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 interface Product {
     _id: string;
@@ -26,6 +27,7 @@ export default function ProductListSection() {
     const [productToDelete, setProductToDelete] = useState<string | null>(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const [productToEdit, setProductToEdit] = useState<Product | null>(null);
+    const [loading, setLoading] = useState(true);
 
     const handleView = (product: Product) => {
         setSelectedProduct(product);
@@ -35,22 +37,25 @@ export default function ProductListSection() {
     // Async function to get all products from the API
     useEffect(() => {
         const fetchProducts = async () => {
-        try {
-            const res = await fetch(`${API_BASE_URL}/failed-products`);
-            if (!res.ok) {
-            throw new Error('Failed to fetch products');
+            setLoading(true);
+            try {
+                const res = await fetch(`${API_BASE_URL}/failed-products`);
+                if (!res.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+                const data = await res.json();
+                setProducts(data);
+            } catch (err) {
+                const message = err instanceof Error ? err.message : String(err);
+                console.error('[ProductListSection] Error fetching products:', message);
+                setError('Unable to load products.');
+            } finally {
+                setLoading(false);
             }
-            const data = await res.json();
-            setProducts(data);
-        } catch (err) {
-            const message = err instanceof Error ? err.message : String(err);
-            console.error('[ProductListSection] Error fetching products:', message);
-            setError('Unable to load products.');
-        }
         };
 
-    fetchProducts();
-}, []);
+        fetchProducts();
+    }, []);
 
     const handleDelete = async (productId: string) => {
         const token = localStorage.getItem('token');
@@ -69,7 +74,10 @@ export default function ProductListSection() {
         <section id="product-list" className="w-full max-w-7xl mx-auto bg-zinc-50 shadow-md rounded-4xl p-6 mt-8">
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-400">All Failed Products</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
-            <ul className="space-y-4">
+            {loading ? (
+                <LoadingSpinner />
+            ) : (
+                <ul className="space-y-4">
                 {products.map((product) => (
                 <li key={product._id} className="flex justify-between items-center border-b-2 text-zinc-600 pb-4">
                     <div className="flex items-center gap-4">
@@ -119,7 +127,8 @@ export default function ProductListSection() {
                     </div>
                 </li>
                 ))}
-            </ul>
+                </ul>
+            )}
 
             {/* Modal */}
             {showModal && selectedProduct && (
