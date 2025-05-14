@@ -38,29 +38,9 @@ export default function CatalogCard({ product }: CatalogCardProps) {
     const [userVote, setUserVote] = useState<'upvote' | 'downvote' | null>(null);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        const payload = token ? JSON.parse(atob(token.split('.')[1])) : null;
-        const userId = payload ? payload.id : null;
-
-        if (userId) {
-            const storedVote = localStorage.getItem(`vote_${userId}_${product._id}`);
-            if (storedVote) {
-                setUserVote(storedVote as 'upvote' | 'downvote');
-            } else {
-                setUserVote(null);
-            }
-        }
-
         const handleStorageChange = () => {
-            const newToken = localStorage.getItem('token');
-            const newPayload = newToken ? JSON.parse(atob(newToken.split('.')[1])) : null;
-            const newUserId = newPayload ? newPayload.id : null;
-            if (newUserId) {
-                const newVote = localStorage.getItem(`vote_${newUserId}_${product._id}`);
-                setUserVote(newVote as 'upvote' | 'downvote' || null);
-            } else {
-                setUserVote(null);
-            }
+            // No localStorage vote tracking, so clear userVote on storage change
+            setUserVote(null);
         };
 
         window.addEventListener('storage', handleStorageChange);
@@ -79,15 +59,24 @@ export default function CatalogCard({ product }: CatalogCardProps) {
     const handleVote = async (voteType: 'upvote' | 'downvote') => {
         try {
             const token = localStorage.getItem('token');
+            if (!token) {
+                showToast('You must be logged in to vote.');
+                return;
+            }
 
             const res = await fetch(`${API_BASE_URL}/failed-products/${product._id}/vote`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': token || '',
+                    'auth-token': token,
                 },
                 body: JSON.stringify({ voteType }),
             });
+
+            if (res.status === 403) {
+                showToast('You have already voted on this product.');
+                return;
+            }
 
             if (!res.ok) {
                 throw new Error('Failed to register vote');
@@ -97,15 +86,10 @@ export default function CatalogCard({ product }: CatalogCardProps) {
             setUpvotes(updatedProduct.upvotes);
             setDownvotes(updatedProduct.downvotes);
             setUserVote(voteType);
-
-            let userId = null;
-            if (token) {
-                const payload = JSON.parse(atob(token.split('.')[1]));
-                userId = payload.id;
-            }
-            localStorage.setItem(`vote_${userId}_${product._id}`, voteType);
+            showToast('Vote registered!');
         } catch (error) {
             console.error('[CatalogCard] Voting error:', error);
+            showToast('An error occurred while voting.');
         }
     };
     
@@ -151,7 +135,7 @@ export default function CatalogCard({ product }: CatalogCardProps) {
                           flex items-center gap-1 px-4 py-2 rounded-full transition
                           ${isUser
                             ? userVote === type
-                              ? 'bg-pink-500 text-zinc-50'
+                              ? 'bg-pink-600 text-white font-semibold'
                               : 'bg-pink-400 hover:bg-pink-300 text-zinc-50'
                             : 'bg-pink-400 text-zinc-50 cursor-pointer'}
                         `}
